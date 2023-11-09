@@ -24,7 +24,11 @@ for (let i = 0; i < numbers.length; i++)
 
 function init() {
     console.log("hello there! from the init");
-    sayHello("Andrew", "McKinnon");
+    const x = "Andrew";
+    sayHello(x, "McKinnon");
+
+    printNumbers();
+    //I'm passing the value not the variable
 }
 
 window.onload = init;
