@@ -103,7 +103,7 @@ function loadTask() {
             console.log(data);
             for(let i=0; i<data.length; i++){
                 let task = data[i]
-                if(task.name == "Andrew"){
+                if(task.name === "Andrew"){
                     displayTask(task);
                 }
             }
