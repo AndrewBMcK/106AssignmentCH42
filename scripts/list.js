@@ -46,9 +46,23 @@ function saveTask() {
     //build the object
     let taskToSave = new Task(Flag, title, desc, color, date, status, budget);
     console.log(taskToSave);
-
+    console.log(JSON.stringify(taskToSave));
+    
     //save the server
     
+    $.ajax({
+        type:"POST",
+        url:"http://fsdiapi.azurewebsites.net/api/tasks/",
+        data:JSON.stringify(taskToSave),
+        contentType:"application/json",
+    success: function(response) {
+        console.log(response);
+    },
+    error: function (error) {
+        console.log(error);
+    }
+
+    });
     
     //display the task
     displayTask(taskToSave);
@@ -115,6 +129,23 @@ function loadTask() {
         });
 }
 
+function deleteTasks() {
+    console.log("deleteTasks");
+    $.ajax({
+        type:"DELETE",
+        url:"http://fsdiapi.azurewebsites.net/api/tasks/clear/Andrew/",
+
+        success: function(response) {
+            console.log(response);
+            $(".pending-task").html("")
+        },
+        error: function (error) {
+            console.log(error);
+        }
+
+        });
+}
+
 function init() {
     //load data
     loadTask();
@@ -123,6 +154,7 @@ function init() {
     $("#btnSave").click(saveTask);
     $("#iconImportant").click(toggleImportant);
     $("#btnDetails").click(toggleVisibility);
+    $("#btnDelete").click(deleteTasks);
 }
 
 window.onload = init;
